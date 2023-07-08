@@ -1,0 +1,34 @@
+@page
+@model WeightReportModel
+@{
+    ViewData["Title"] = "Weight Report";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.RailCarWeights.Count == 0)
+{
+    <p>No rail car weights recorded.</p>
+}
+else
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Identifier</th>
+                <th>Type</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var railCarWeight in Model.RailCarWeights)
+            {
+                <tr>
+                    <td>@railCarWeight.CarId</td>
+                    <td>@railCarWeight.CarType</td>
+                    <td>@railCarWeight.ScaleWeight</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

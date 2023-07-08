@@ -1,0 +1,71 @@
+@page
+@model WeightScaleModel
+@{
+    ViewData["Title"] = "RailCar Scale Weight";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.IsSuccess)
+{
+    <div class="alert alert-success" role="alert">
+        Record added successfully!
+    </div>
+}
+
+<form method="post">
+    <div class="mb-3">
+        <label class="form-label">Owner</label><br />
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Owner" id="ownerAUXL" value="AUXL" checked />
+            <label class="form-check-label" for="ownerAUXL">AUXL</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Owner" id="ownerSCXT" value="SCXT" />
+            <label class="form-check-label" for="ownerSCXT">SCXT</label>
+        </div>
+        <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="Owner" id="ownerGAXT" value="GAXT" />
+            <label class="form-check-label" for="ownerGAXT">GAXT</label>
+        </div>
+        @if (!Model.IsValidOwner)
+        {
+            <div class="text-danger">Please select an owner.</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="carId" class="form-label">Car ID</label>
+        <input type="text" class="form-control" id="carId" name="CarId" value="@Model.CarId" />
+        @if (!Model.IsValidCarId)
+        {
+            <div class="text-danger">Please enter a valid car ID.</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="type" class="form-label">Type</label>
+        <select class="form-select" id="type" name="Type">
+            <option value="">Select a type</option>
+            <option value="BOX_CAR">BOX_CAR</option>
+            <option value="COAL_CAR">COAL_CAR</option>
+            <option value="COVERED_HOPPER">COVERED_HOPPER</option>
+            <option value="OIL_TANK">OIL_TANK</option>
+        </select>
+        @if (!Model.IsValidType)
+        {
+            <div class="text-danger">Please select a valid type.</div>
+        }
+    </div>
+    <div class="mb-3">
+        <label for="weight" class="form-label">Weight (in 100's)</label>
+        <input type="text" class="form-control" id="weight" name="Weight" value="@Model.Weight" />
+        @if (!Model.IsValidWeight)
+        {
+            <div class="text-danger">Please enter a valid weight.</div>
+        }
+    </div>
+    <div>
+        <button type="submit" class="btn btn-success" name="Action" value="Record">Record</button>
+        <button type="submit" class="btn btn-secondary" name="Action" value="Clear">Clear</button>
+        <a class="btn btn-secondary" asp-page="/WeightReport">Go to Report</a>
+    </div>
+</form>
